@@ -1,0 +1,19 @@
+{
+  "name": "nature-ai2html",
+  "version": "1.0.0",
+  "description": "Nature implementation of ai2html",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "chrish-creditdesign",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^28.1.6",
+    "jest": "^28.1.3",
+    "jest-environment-jsdom": "^28.1.3",
+    "ts-jest": "^28.0.7",
+    "types-for-adobe": "^7.0.6",
+    "typescript": "^4.7.4"
+  }
+}
