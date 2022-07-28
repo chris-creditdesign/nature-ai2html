@@ -1,11 +1,6 @@
 import roundTo from "../roundTo";
 
-const getCssColor = (
-  r: number,
-  g: number,
-  b: number,
-  opacity: number = 100
-) => {
+const getCssColor = (r: number, g: number, b: number, opacity = 100) => {
   let col: string;
   let o: number;
   if (opacity > 0 && opacity < 100) {
