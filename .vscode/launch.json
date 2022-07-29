@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "extendscript-debug",
+      "request": "launch",
+      "name": "nature-debug",
+      "script": "${workspaceFolder}/nature-ai2html-debug-v1.0.0.js",
+      "hostAppSpecifier": "illustrator-24.064",
+      "engineName": "main"
+    },
+    {
+      "type": "extendscript-debug",
+      "request": "launch",
+      "name": "nature-ai2html",
+      "script": "${workspaceFolder}/nature-ai2html-v1.0.0.js",
+      "hostAppSpecifier": "illustrator-24.064",
+      "engineName": "main"
+    }
+  ]
+}
