@@ -5,7 +5,7 @@ import packageJson from "./package.json";
 export default {
   input: "src/debug.ts",
   output: {
-    file: `nature-ai2html-debug-v${packageJson.version}.js`,
+    file: `dist/nature-ai2html-debug-v${packageJson.version}.js`,
     format: "iife",
   },
   plugins: [typescript({ module: "ES2015" }), json()],
