@@ -46,7 +46,12 @@ test("expect filter to behave like array.protoype.filter", () => {
   let invalidEntries = 0;
 
   function filterByID(item: { id: number }) {
-    if (Number.isFinite(item.id) && item.id !== 0) {
+    if (
+      item.id !== 0 &&
+      item.id !== null &&
+      !isNaN(item.id) &&
+      item.id !== undefined
+    ) {
       return true;
     }
     invalidEntries++;

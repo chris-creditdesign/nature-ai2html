@@ -1,6 +1,7 @@
+import { type ExtendedString } from "src/types/global";
 import straightenCurlyQuotes from "../straightenCurlyQuotes";
 
-const straightenCurlyQuotesInsideAngleBrackets = (str: string) => {
+const straightenCurlyQuotesInsideAngleBrackets = (str: ExtendedString) => {
   // This function's purpose is to fix quoted properties in HTML tags that were
   // typed into text blocks (Illustrator tends to automatically change single
   // and double quotes to curly quotes).

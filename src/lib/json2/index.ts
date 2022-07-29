@@ -157,12 +157,18 @@
 // Create a JSON object only if one does not already exist. We create the
 // methods in a closure to avoid creating global variables.
 
+import { type ExtendedString } from "src/types/global";
+
 type JSONPolyfill = {
   parse?: Function;
   stringify?: Function;
 };
 
 declare global {
+  interface Date {
+    toJSON: () => string | null;
+  }
+
   interface Boolean {
     toJSON(): () => any;
   }
@@ -226,16 +232,16 @@ const json2 = function (): JSONPolyfill {
   var meta: Record<string, string>;
   var rep: ((...args: any[]) => any) | string[];
 
-  function quote(string: string) {
+  function quote(string: ExtendedString) {
     // If the string contains no control characters, no quote characters, and no
     // backslash characters, then we can safely slap some quotes around it.
     // Otherwise we must also replace the offending characters with safe escape
     // sequences.
 
-    rx_escapable.lastIndex = 0;
-    return rx_escapable.test(string)
+    // rx_escapable.lastIndex = 0;
+    return rx_escapable.test(string as string)
       ? '"' +
-          string.replace(rx_escapable, function (a) {
+          string.replace(rx_escapable, function (a: string): string {
             var c = meta[a];
             return typeof c === "string"
               ? c
@@ -308,7 +314,7 @@ const json2 = function (): JSONPolyfill {
 
         // Is the value an array?
 
-        if (Object.prototype.toString.apply(value) === "[object Array]") {
+        if (Object.prototype.toString.apply(value, {}) === "[object Array]") {
           // The value is an array. Stringify every element. Use null as a placeholder
           // for non-JSON values.
 
@@ -433,7 +439,10 @@ const json2 = function (): JSONPolyfill {
   // If the JSON object does not yet have a parse method, give it one.
 
   if (typeof JSON.parse !== "function") {
-    JSON.parse = function (text: string, reviver?: (...args: any[]) => any) {
+    JSON.parse = function (
+      text: ExtendedString,
+      reviver?: (...args: any[]) => any
+    ) {
       // The parse method takes a text and an optional reviver function, and returns
       // a JavaScript value if the text is a valid JSON text.
 
@@ -466,8 +475,8 @@ const json2 = function (): JSONPolyfill {
       // incorrectly, either silently deleting them, or treating them as line endings.
 
       text = String(text);
-      rx_dangerous.lastIndex = 0;
-      if (rx_dangerous.test(text)) {
+      //   rx_dangerous.lastIndex = 0;
+      if (rx_dangerous.test(text as string)) {
         text = text.replace(rx_dangerous, function (a) {
           return "\\u" + ("0000" + a.charCodeAt(0).toString(16)).slice(-4);
         });
@@ -506,7 +515,7 @@ const json2 = function (): JSONPolyfill {
 
       // If the text is not JSON parseable, then a SyntaxError is thrown.
 
-      throw new SyntaxError("JSON.parse");
+      throw new Error("JSON.parse");
     };
   }
 

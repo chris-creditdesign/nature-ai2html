@@ -1,19 +1,17 @@
-/**
- * @jest-environment jsdom
- */
-
 import toArray from ".";
 
 test("Expect elements of an array-like object to returned within a new array", () => {
-  // Set up our document body
-  document.body.innerHTML =
-    "<div>" + "  <p>One</p>" + "  <p>Two</p>" + "  <p>Three</p>" + "</div>";
+  const fakeNodeList = {
+    0: "<div>",
+    1: "  <p>One</p>",
+    2: "  <p>Two</p>",
+    3: "  <p>Three</p>",
+    4: "</div>",
+    length: 5,
+  };
 
-  const nodeList = document.querySelectorAll("p");
-  const nodeArray = toArray(nodeList);
+  const nodeArray = toArray(fakeNodeList);
 
-  expect(Array.isArray(nodeList)).toBe(false);
-  expect(Array.isArray(nodeArray)).toBe(true);
-  expect(nodeList.length).toEqual(nodeArray.length);
-  expect(nodeList[0]).toEqual(nodeArray[0]);
+  expect(fakeNodeList.length).toEqual(nodeArray.length);
+  expect(fakeNodeList[0]).toEqual(nodeArray[0]);
 });

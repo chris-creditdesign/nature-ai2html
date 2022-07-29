@@ -1,11 +1,11 @@
-// type Replacements<T> = {
-//   [Tprop in keyof T]: T[Tprop];
-// };
-
+import { type ExtendedString } from "src/types/global";
 type Replacements = Record<string, string>;
 
 // Apply very basic string substitution to a template
-const applyTemplate = (template: string, replacements: Replacements) => {
+const applyTemplate = (
+  template: ExtendedString,
+  replacements: Replacements
+) => {
   const keyExp = "([_a-zA-Z][\\w-]*)";
 
   const mustachePattern = new RegExp(
@@ -27,9 +27,11 @@ const applyTemplate = (template: string, replacements: Replacements) => {
     }
   };
 
-  return template
-    .replace(mustachePattern, replace)
-    .replace(ejsPattern, replace);
+  const replace1: ExtendedString = template.replace(mustachePattern, replace);
+
+  const replace2 = replace1.replace(ejsPattern, replace);
+
+  return replace2;
 };
 
 export default applyTemplate;

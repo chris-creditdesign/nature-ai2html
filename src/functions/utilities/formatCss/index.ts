@@ -1,7 +1,7 @@
 // obj: JS object containing css properties and values
 // indentStr: string to use as block CSS indentation
-const formatCss = <T>(
-  obj: { [Tprop in keyof T]: T[Tprop] },
+const formatCss = (
+  obj: Record<string, string | number>,
   indentStr: " " | "\t" | "\t\t"
 ) => {
   let css = "";
