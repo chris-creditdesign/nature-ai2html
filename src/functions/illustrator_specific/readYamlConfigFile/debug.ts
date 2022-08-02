@@ -6,7 +6,7 @@ const readYamlConfigFileDebug = () => {
 
   let folder = getScriptDirectory();
 
-  let should_be_null = readYamlConfigFile(
+  let should_be_false = readYamlConfigFile(
     folder.fullName + "/test/data/missing_file"
   );
 
@@ -17,7 +17,8 @@ const readYamlConfigFileDebug = () => {
   // 1. Check that a missing file returns null
   // 2. Check that the config file was parsed correctly
   if (
-    should_be_null === null &&
+    !should_be_false &&
+    typeof should_be_parsed_yml !== "boolean" &&
     should_be_parsed_yml.project_type === "ai2html" &&
     should_be_parsed_yml.min_width === "300" &&
     should_be_parsed_yml.max_width === "600" &&

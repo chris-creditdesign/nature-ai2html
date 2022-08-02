@@ -6,7 +6,7 @@ const readGitConfigFileDebug = () => {
 
   let folder = getScriptDirectory();
 
-  let should_be_null = readGitConfigFile(
+  let should_be_false = readGitConfigFile(
     folder.fullName + "/test/data/missing_file"
   );
 
@@ -17,7 +17,8 @@ const readGitConfigFileDebug = () => {
   // 1. Check that a missing file returns null
   // 2. Check that the config file was parsed correctly
   if (
-    should_be_null === null &&
+    !should_be_false &&
+    typeof should_be_parsed_config !== "boolean" &&
     should_be_parsed_config.repositoryformatversion === "0" &&
     should_be_parsed_config.ignorecase === "true" &&
     should_be_parsed_config.url === "git@github.com:newsdev/ai2html.git" &&

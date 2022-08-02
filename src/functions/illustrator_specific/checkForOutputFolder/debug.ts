@@ -6,12 +6,20 @@ const checkForOutputFolderDebug = (): string => {
 
   let folder = getScriptDirectory();
 
-  //   let should_be_true = folderExists(folder.fullName + "/test/data/text");
-  //   let should_be_false = folderExists("nonsense");
+  let should_be_true = checkForOutputFolder(
+    folder.fullName + "/test/data/text"
+  ).folderAlreadyExists;
 
-  //   if (should_be_true && !should_be_false) {
-  //     alertText = "PASS: folderExists \r";
-  //   }
+  let should_be_false = checkForOutputFolder(
+    folder.fullName + "/test/data/nonsense"
+  ).folderAlreadyExists;
+
+  const temp_folder = new Folder(folder.fullName + "/test/data/nonsense");
+  temp_folder.remove();
+
+  if (should_be_true && !should_be_false) {
+    alertText = "PASS: folderExists \r";
+  }
 
   return alertText;
 };

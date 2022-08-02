@@ -1,11 +1,12 @@
+import stringToLines from "src/functions/utilities/stringToLines";
 import trim from "../../utilities/trim/index";
 
 // TODO: improve
 // (currently ignores bracketed sections of the config file)
 const readGitConfigFile = (path: string) => {
-  var file = new File(path);
-  var o = null;
-  var parts;
+  let file = new File(path);
+  let o: false | Record<string, string> = false;
+  let parts;
   if (file.exists) {
     o = {};
     file.open("r");

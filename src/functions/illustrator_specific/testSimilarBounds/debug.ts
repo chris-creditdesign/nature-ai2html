@@ -1,7 +1,6 @@
-import { AiDocument } from "src/types/global";
 import testSimilarBounds from ".";
 
-const testSimilarBoundsDebug = (doc: AiDocument): string => {
+const testSimilarBoundsDebug = (doc: Document): string => {
   let alertText: string = "FAIL: testSimilarBounds \r";
 
   const layer: Layer = doc.layers.add();

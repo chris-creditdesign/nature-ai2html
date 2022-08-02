@@ -9,9 +9,10 @@ const readTextFileDebug = () => {
   let should_be_string = readTextFile(
     folder.fullName + "/test/data/config.yml"
   );
-  let should_be_empty_string = readTextFile("nonsense");
 
-  if (typeof should_be_string === "string" && should_be_empty_string === "") {
+  let should_be_false = readTextFile("nonsense");
+
+  if (typeof should_be_string === "string" && !should_be_false) {
     alertText = "PASS: readTextFile \r";
   }
 

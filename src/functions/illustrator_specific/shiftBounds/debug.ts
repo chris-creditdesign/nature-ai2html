@@ -4,7 +4,7 @@ const shiftBoundsDebug = (doc: Document): string => {
   let alertText: string = "FAIL: shiftBounds \r";
 
   const layer: Layer = doc.layers.add();
-  layer.name = "shift-bounds-layer";
+  layer.name = "test-shift-bounds-layer";
 
   const rect: PathItem = layer.pathItems.rectangle(0, 0, 300, 300);
 

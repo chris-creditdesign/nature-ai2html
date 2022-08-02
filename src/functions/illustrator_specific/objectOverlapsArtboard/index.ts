@@ -1,7 +1,7 @@
 import testBoundsIntersection from "../testBoundsIntersection/index";
 
 // TODO: Debug
-const objectOverlapsArtboard = (obj, ab: Artboard) => {
+const objectOverlapsArtboard = (obj: PageItem, ab: Artboard) => {
   return testBoundsIntersection(ab.artboardRect, obj.geometricBounds);
 };
 

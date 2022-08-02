@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "rollup:debug": "rollup --config rollup.config.debug.js",
+    "rollup:debug:watch": "rollup --config rollup.config.debug.js --watch",
     "test": "jest"
   },
   "author": "chrish-creditdesign",

@@ -1,5 +1,5 @@
-const readFile = (path: string): string | null => {
-  let content = null;
+const readFile = (path: string): string | false => {
+  let content: string | false = false;
   const file = new File(path);
   if (file.exists) {
     file.open("r");

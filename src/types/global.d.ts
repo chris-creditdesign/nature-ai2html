@@ -69,3 +69,8 @@ export interface ExtendedString extends String {
   ) => string;
   split: (delimiter: string | RegExp, limit?: number) => string[];
 }
+
+export class ExtendedMatrix extends Matrix {
+  public mValueTX: number;
+  public mValueTY: number;
+}
