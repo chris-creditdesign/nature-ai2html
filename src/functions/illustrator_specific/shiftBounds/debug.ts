@@ -14,6 +14,8 @@ const shiftBoundsDebug = (doc: Document): string => {
     alertText = "PASS: shiftBounds \r";
   }
 
+  layer.remove();
+
   return alertText;
 };
 

@@ -16,6 +16,8 @@ const clearMatrixShiftDebug = (doc: Document): string => {
     alertText = "PASS: clearMatrixShift \r";
   }
 
+  layer.remove();
+
   return alertText;
 };
 

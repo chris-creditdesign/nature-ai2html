@@ -37,6 +37,9 @@ const objectOverlapsAnArtboardDebug = (doc: Document): string => {
     alertText = "PASS: objectOverlapsAnArtboard \r";
   }
 
+  layer.remove();
+  doc.artboards.remove(1);
+
   return alertText;
 };
 

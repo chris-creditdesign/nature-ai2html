@@ -26,6 +26,8 @@ const testBoundsIntersectionDebug = (doc: Document): string => {
     alertText = "PASS: testBoundsIntersection \r";
   }
 
+  layer.remove();
+
   return alertText;
 };
 

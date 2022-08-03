@@ -74,3 +74,30 @@ export class ExtendedMatrix extends Matrix {
   public mValueTX: number;
   public mValueTY: number;
 }
+
+export class ExtendedPageItem extends PageItem {
+  /**
+   * The class name of the object.
+   */
+  readonly typename: "PageItem";
+}
+
+export class ExtendedLayer extends Layer {
+  /**
+   * The class name of the object.
+   */
+  readonly typename: "Layer";
+}
+
+export class ExtendedGroupItem extends GroupItem {
+  /**
+   * The class name of the object.
+   */
+  readonly typename: "GroupItem";
+}
+
+export type LockableObject =
+  | PathItem
+  | ExtendedPageItem
+  | ExtendedLayer
+  | ExtendedGroupItem;

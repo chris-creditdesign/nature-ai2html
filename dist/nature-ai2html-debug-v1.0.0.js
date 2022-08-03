@@ -25,6 +25,7 @@
       if (should_be_true && !should_be_false) {
           alertText = "PASS: testSimilarBounds \r";
       }
+      layer.remove();
       return alertText;
   };
 
@@ -44,6 +45,7 @@
       if (should_be_true && !should_be_false) {
           alertText = "PASS: testBoundsIntersection \r";
       }
+      layer.remove();
       return alertText;
   };
 
@@ -60,6 +62,7 @@
       if (test[0] === 20 && test[1] === 20 && test[2] === 320 && test[3] === -280) {
           alertText = "PASS: shiftBounds \r";
       }
+      layer.remove();
       return alertText;
   };
 
@@ -358,7 +361,7 @@
   };
 
   var parseYaml = function (str) {
-      var o = {};
+      var o;
       var lines = stringToLines(str);
       for (var i = 0; i < lines.length; i++) {
           o = parseKeyValueString(lines[i], o);
@@ -465,6 +468,7 @@
       if (should_be_true && !should_be_false) {
           alertText = "PASS: objectOverlapsArtboard \r";
       }
+      layer.remove();
       return alertText;
   };
 
@@ -508,6 +512,8 @@
       if (should_be_true && !should_be_false) {
           alertText = "PASS: objectOverlapsAnArtboard \r";
       }
+      layer.remove();
+      doc.artboards.remove(1);
       return alertText;
   };
 
@@ -579,6 +585,7 @@
       if (shifted instanceof Matrix) {
           alertText = "PASS: clearMatrixShift \r";
       }
+      layer.remove();
       return alertText;
   };
 
@@ -608,7 +615,11 @@
   }
 
   var JSON = json2();
-  var concatMessages = function (args) {
+  var concatMessages = function () {
+      var args = [];
+      for (var _i = 0; _i < arguments.length; _i++) {
+          args[_i] = arguments[_i];
+      }
       var msg = "";
       var arg;
       for (var i = 0; i < args.length; i++) {
@@ -678,6 +689,61 @@
       return alertText;
   };
 
+  var calcProgressBarSteps = function (doc) {
+      var n = 0;
+      forEachUsableArtboard(function () { return (n += 2); }, doc);
+      return n;
+  };
+
+  var calcProgressBarStepsDebug = function (doc) {
+      var alertText = "FAIL: calcProgressBarSteps \r";
+      var newArtBoardLeft = 1500;
+      var newArtBoardTop = 1000;
+      var newArtBoardRight = 2500;
+      var newArtBoardBottom = 0;
+      var newArtboardRect = [
+          newArtBoardLeft,
+          newArtBoardTop,
+          newArtBoardRight,
+          newArtBoardBottom,
+      ];
+      var artboard_2 = doc.artboards.add(newArtboardRect);
+      artboard_2.name = "test-calc-progress-bar-steps-artboard-2";
+      if (calcProgressBarSteps(doc) === 4) {
+          alertText = "PASS: calcProgressBarSteps \r";
+      }
+      doc.artboards.remove(1);
+      return alertText;
+  };
+
+  var forEachUsableArtboardDebug = function (doc) {
+      var alertText = "FAIL: forEachUsableArtboard \r";
+      var newArtBoardLeft = 1000;
+      var newArtBoardTop = 1000;
+      var newArtBoardRight = 2000;
+      var newArtBoardBottom = 0;
+      var newArtboardRect = [
+          newArtBoardLeft,
+          newArtBoardTop,
+          newArtBoardRight,
+          newArtBoardBottom,
+      ];
+      var artboard_2 = doc.artboards.add(newArtboardRect);
+      artboard_2.name = "-test-object-overlaps-an-artboard-artboard-2";
+      var artboard_3 = doc.artboards.add(newArtboardRect);
+      artboard_3.name = "test-object-overlaps-an-artboard-artboard-2";
+      var numberOfUsableArtboards = 0;
+      forEachUsableArtboard(function (_ab, _i) {
+          numberOfUsableArtboards++;
+      }, doc);
+      if (numberOfUsableArtboards === 2) {
+          alertText = "PASS: forEachUsableArtboard \r";
+      }
+      doc.artboards.remove(1);
+      doc.artboards.remove(1);
+      return alertText;
+  };
+
   var myDocument = app.documents.add();
   var alertText = "Passing tests:\r";
   alertText += "PASS: version: " + version + " extracted from package.json.\r";
@@ -697,10 +763,13 @@
   alertText += deleteFileDebug();
   alertText += clearMatrixShiftDebug(myDocument);
   alertText += checkForOutputFolderDebug();
+  alertText += calcProgressBarStepsDebug(myDocument);
+  alertText += forEachUsableArtboardDebug(myDocument);
   var layer = myDocument.layers.add();
   layer.name = "alert-text-layer";
   var text = layer.textFrames.add();
   text.contents = alertText;
+  text.position = [10, 782];
   alert(alertText);
 
 })();

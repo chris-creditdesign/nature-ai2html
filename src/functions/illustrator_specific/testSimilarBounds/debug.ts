@@ -24,6 +24,8 @@ const testSimilarBoundsDebug = (doc: Document): string => {
     alertText = "PASS: testSimilarBounds \r";
   }
 
+  layer.remove();
+
   return alertText;
 };
 
